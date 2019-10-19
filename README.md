@@ -1,6 +1,6 @@
 # json_schema
 
-An attempt to implement json schema in Crystal.
+An attempt to implement [json schema](https://json-schema.org/) validation in Crystal.
 
 Work in progress but could be a useful start
 
