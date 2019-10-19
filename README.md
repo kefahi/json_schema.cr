@@ -64,12 +64,12 @@ Work in progress but could be a useful start
 }
 ```
 
+`Sample code`
 ```crystal
 require "json_schema"
-json_data = JSON.parse(File.read "data.json") 
-schema_definition = File.read "schema.json"
-schema = JSON::Schema.from_json(schema_definition)
-schema.validate(json_data)
+json_data = JSON.parse File.read "data.json" 
+schema = JSON::Schema.from_json File.read "schema.json"
+schema.validate json_data
 ```
 
 ## Contributing
