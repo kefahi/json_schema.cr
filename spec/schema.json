@@ -1,0 +1,43 @@
+{
+	"title": "Example Schema",
+		"type": "object",
+		"properties": {
+			"id": {
+				"description": "The unique identifier for a product",
+				"type": "integer"
+			},
+			"name": {
+				"type": "string"
+			},
+			"price": {
+				"type": "number",
+				"minimum": 0
+			},
+			"tags": {
+				"type": "array",
+				"items": {
+					"type": "string"
+				},
+				"minItems": 1,
+				"uniqueItems": true
+			},
+			"dimensions": {
+				"type": "object",
+				"properties": {
+					"length": {"type": "number"},
+					"width": {"type": "number"},
+					"height": {"type": "number"}
+				},
+				"required": ["length", "width", "height"]
+			},
+			"warehouseLocation": {
+				"type": "object",
+				"properties": {
+					"longitude": {"type": "number"},
+					"latitude": {"type": "number"}
+				}
+
+			}
+		},
+		"required": ["firstName", "lastName"]
+}

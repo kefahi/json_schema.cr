@@ -1,9 +1,8 @@
 require "./spec_helper"
 
-describe JsonSchema do
-  # TODO: Write tests
-
+describe JSON do
   it "works" do
-    false.should eq(true)
+    JSON::Schema.from_json(File.read "#{__DIR__}/schema.json").validate(JSON.parse(File.read "#{__DIR__}/data.json"))
+    true.should eq(true)
   end
 end
