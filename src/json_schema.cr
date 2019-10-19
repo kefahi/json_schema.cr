@@ -20,11 +20,11 @@ module JSON
       # puts "#{key} => #{value}  : #{type}"
       case type
       when "integer"
-        raise "Invalid integer value for #{value}" if value.as_i.nil?
+        raise "Invalid integer value #{value} for key #{key}" if value.as_i.nil?
       when "string"
-        raise "Invalid string value for #{value}" if value.as_s.nil?
+        raise "Invalid string value #{value} for key #{key}" if value.as_s.nil?
       when "number"
-        raise "Invalid number value for #{value}" unless (n = value.as_f?) && (@minimum.nil? || (minimum = @minimum.as Float64) && n >= minimum)
+        raise "Invalid number value #{value} for key #{key}" unless (n = value.as_f?) && (@minimum.nil? || (minimum = @minimum.as Float64) && n >= minimum)
       when "array"
         raise "Array is missing items or type declaration" unless (items = @items.as Hash(String, String)) && items["type"]?
         array_type = items["type"]
@@ -34,14 +34,10 @@ module JSON
         end
       when "object"
         h = value.as_h
-        required = @required.as? Array(String)
         if properties = @properties.as Hash(String, Property)
+          raise "Missing required key(s) under key #{key}" if (required = @required.as? Array(String)) && required != (required & properties.keys & h.keys)
           properties.each do |property_key, property|
-            if h[property_key]?
-              property.validate(property_key, property.type, h[property_key])
-            elsif required && required.includes? property_key
-              raise "Required key is missing #{property_key}"
-            end
+            property.validate(property_key, property.type, h[property_key]) if h[property_key]?
           end
         end
       else
@@ -55,17 +51,14 @@ module JSON
     property title : String
     property type : String
     property properties : Hash(String, Property)
-    property required : Array(String)
+    property required : Array(String)?
 
     def validate(any : JSON::Any)
       raise "root type is not 'object'" unless @type == "object"
       h = any.as_h
-      @properties.each do |key, property|
-        if h[key]?
-          property.validate key, property.type, h[key]
-        elsif @required.includes? key
-          raise "Required key #{key} is missing"
-        end
+      raise "Missing required key(s)" if (required = @required.as? Array(String)) && required != (required & @properties.keys & h.keys)
+      @properties.each do |property_key, property|
+        property.validate property_key, property.type, h[property_key] if h[property_key]?
       end
     end
   end
