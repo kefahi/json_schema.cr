@@ -1,6 +1,6 @@
 # json_schema
 
-A implementation of attempt of json schema in Crystal.
+An attempt to implement json schema in Crystal.
 
 Work in progress but could be a useful start
 
