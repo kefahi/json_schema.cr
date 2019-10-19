@@ -82,4 +82,4 @@ schema.validate json_data
 
 ## Contributors
 
-- [Kefah Issa](https://github.com/kefahi) - This a continuation on work from [DougEverly](https://github.com/DougEverly/json_schema.cr)
+- [Kefah Issa](https://github.com/kefahi) - This is a continuation on work from [DougEverly](https://github.com/DougEverly/json_schema.cr)
