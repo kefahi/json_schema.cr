@@ -18,8 +18,8 @@ Work in progress but could be a useful start
 
 ## Usage
 
-`data.json`
-```json
+`Sample data.json`
+```javascript
 {
     "id": 1,
     "name": "A green door",
@@ -28,8 +28,8 @@ Work in progress but could be a useful start
 }
 ```
 
-`schema.json`
-```json
+`Sample schema.json`
+```javascript
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "Product",
